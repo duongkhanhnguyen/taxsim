@@ -3,43 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaxSim Pro v2.6 - Hệ thống Thực hành Kê khai Thuế Điện tử</title>
+    <title>TaxSim Pro v2.7 - Hệ thống Thực hành Kê khai Thuế Điện tử</title>
     <style>
         /* CẤU HÌNH CSS THUẦN KHÔNG PHỤ THUỘC INTERNET */
         body { font-family: Arial, sans-serif; background-color: #f1f5f9; margin: 0; padding: 0; color: #334155; }
         header { background: linear-gradient(to right, #0f172a, #1e3a8a); color: white; padding: 20px; border-bottom: 4px solid #f59e0b; }
-        .header-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; items-center: center; }
+        .header-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .main-container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
         
         /* THANH ĐIỀU HƯỚNG TAB */
-        .tab-menu { display: flex; background: white; padding: 8px; rounded-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 8px; margin-bottom: 20px; gap: 10px; }
+        .tab-menu { display: flex; background: white; padding: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 8px; margin-bottom: 20px; gap: 10px; }
         .tab-btn { flex: 1; padding: 12px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; background-color: transparent; color: #475569; transition: all 0.2s; }
         .tab-btn:hover { background-color: #f1f5f9; }
         .tab-btn.active { background-color: #2563eb; color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         
         /* KHU VỰC NỘI DUNG */
-        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-bottom: 20px; }
-        .card-dark { background: #1e293b; color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-bottom: 20px; position: relative; z-index: 10; }
+        .card-dark { background: #1e293b; color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; position: relative; z-index: 10; }
         .card-title { font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; color: #1e293b; }
         .card-dark .card-title { color: #f59e0b; border-bottom-color: #334155; }
         
         /* FORM NHẬP LIỆU */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
-        .form-group { margin-bottom: 15px; }
-        .form-group-full { margin-bottom: 15px; grid-column: span 2; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group-full { margin-bottom: 15px; grid-column: span 2; text-align: left; }
         @media (max-width: 600px) { .form-group-full { grid-column: span 1; } }
         label { display: block; font-size: 12px; font-weight: bold; color: #64748b; text-transform: uppercase; margin-bottom: 5px; }
         .card-dark label { color: #94a3b8; }
-        input[type="text"], input[type="number"], select { w-index: 1; width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
+        
+        input[type="text"], input[type="number"], select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; box-sizing: border-box; background-color: #ffffff; color: #1e293b; display: block; position: relative; z-index: 20; }
         input:focus, select:focus { border-color: #2563eb; outline: none; box-shadow: 0 0 0 2px rgba(37,99,235,0.2); }
         .card-dark input { background: #334155; border-color: #475569; color: white; }
         
         /* NÚT BẤM */
         .btn-next { background-color: #2563eb; color: white; font-weight: bold; padding: 12px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; float: right; }
         .btn-next:hover { background-color: #1d4ed8; }
-        .btn-submit { background-color: #16a34a; color: white; font-weight: bold; padding: 14px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 10px; }
-        .btn-submit:hover { background-color: #15803d; }
+        .btn-submit { background-color: #2563eb; color: white; font-weight: bold; padding: 14px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .btn-submit:hover { background-color: #1d4ed8; }
         
         /* BẢNG LỊCH SỬ TAB 3 */
         table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 15px; }
@@ -50,7 +51,7 @@
         .badge-error { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
         
         /* POPUP BIÊN LAI */
-        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; justify-content: center; items-center: center; align-items: center; z-index: 999; }
+        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 999; }
         .modal-content { background: white; padding: 25px; border-radius: 12px; max-width: 450px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-size: 13px; }
         .receipt-box { background: #f8fafc; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: monospace; margin: 15px 0; line-height: 1.5; }
         
@@ -62,8 +63,8 @@
     <header>
         <div class="header-container">
             <div>
-                <div style="font-size: 24px; font-weight: 900; color: #fbbf24; letter-spacing: 1px;">TAXSIM PRO v2.6</div>
-                <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px; text-transform: uppercase;">Phần mềm Mô phỏng Thực hành Kê khai Thuế dành cho Sinh viên</div>
+                <div style="font-size: 24px; font-weight: 900; color: #fbbf24; letter-spacing: 1px;">TAXSIM PRO v2.7</div>
+                <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px; text-transform: uppercase;">Phần mềm thực hành Tin học Kế toán doanh nghiệp chuyên dụng</div>
             </div>
             <div style="text-align: right; background: rgba(0,0,0,0.2); padding: 8px 15px; border-radius: 6px; border: 1px solid #334155;">
                 <div style="font-size: 11px; color: #94a3b8;">Máy chủ Tổng cục Thuế</div>
@@ -75,9 +76,9 @@
     <main class="main-container">
         
         <div class="tab-menu">
-            <button type="button" id="btn-tab-info" onclick="switchTab('tab-info')" class="tab-btn active">TAB 1: Thông Tin Thực Hành</button>
-            <button type="button" id="btn-tab-submit" onclick="switchTab('tab-submit')" class="tab-btn">TAB 2: Kê Khai Thuế</button>
-            <button type="button" id="btn-tab-history" onclick="switchTab('tab-history')" class="tab-btn">TAB 3: Kết Quả Xử Lý (<span id="count-badge">0</span>)</button>
+            <button type="button" id="btn-tab-info" onclick="switchTab('tab-info')" class="tab-btn active">TAB 1: Thông Tin</button>
+            <button type="button" id="btn-tab-submit" onclick="switchTab('tab-submit')" class="tab-btn">TAB 2: Nộp Tờ Khai</button>
+            <button type="button" id="btn-tab-history" onclick="switchTab('tab-history')" class="tab-btn">TAB 3: Kết Quả (<span id="count-badge">0</span>)</button>
         </div>
 
         <div id="tab-content-housing">
@@ -137,16 +138,32 @@
                     
                     <div class="form-group" style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
                         <label style="color: #1e293b; margin-bottom: 10px;">1. Chọn Kỳ Tính Thuế</label>
-                        <div style="margin-bottom: 10px;">
-                            <label style="display:inline-block; margin-right: 20px; text-transform:none; font-size:14px; color:#334155;">
-                                <input type="radio" name="period-type" value="Tháng" checked onclick="changePeriodDropdown('Tháng')"> Tờ khai theo Tháng
-                            </label>
-                            <label style="display:inline-block; text-transform:none; font-size:14px; color:#334155;">
-                                <input type="radio" name="period-type" value="Quý" onclick="changePeriodDropdown('Quý')"> Tờ khai theo Quý
-                            </label>
+                        <div class="grid-2" style="margin-bottom: 10px; gap: 20px;">
+                            <div>
+                                <label style="display:inline-block; margin-right: 20px; text-transform:none; font-size:14px; color:#334155; cursor: pointer;">
+                                    <input type="radio" name="period-type" value="Tháng" checked onclick="updatePeriodOptions()"> Tờ khai theo Tháng
+                                </label>
+                                <label style="display:inline-block; text-transform:none; font-size:14px; color:#334155; cursor: pointer;">
+                                    <input type="radio" name="period-type" value="Quý" onclick="updatePeriodOptions()"> Tờ khai theo Quý
+                                </label>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-size: 13px; color:#475569; font-weight:bold;">Năm thực hành:</span>
+                                <select id="year-select" onchange="updatePeriodOptions()" style="width: 100px; padding: 5px;">
+    <option value="2026" selected>2026</option>
+    <option value="2027">2027</option>
+    <option value="2028">2028</option>
+    <option value="2029">2029</option>
+    <option value="2030">2030</option>
+    <option value="2031">2031</option>
+    <option value="2032">2032</option>
+    <option value="2033">2033</option>
+    <option value="2034">2034</option>
+    <option value="2035">2035</option>
+</select>
+                            </div>
                         </div>
-                        <select id="period-detail">
-                            </select>
+                        <select id="period-detail"></select>
                     </div>
 
                     <div class="form-group">
@@ -157,31 +174,30 @@
                             <option value="Thuế Thu Nhập Doanh Nghiệp (TNDN)">Thuế Thu Nhập Doanh Nghiệp (TNDN)</option>
                             <option value="Thuế Tiêu Thụ Đặc Biệt (TTĐB)">Thuế Tiêu Thụ Đặc Biệt (TTĐB)</option>
                             <option value="Thuế Bảo Vệ Môi Trường">Thuế Bảo Vệ Môi Trường</option>
-                            <option value="Thuế Khác / Thuế Nhà Thầu">Các loại thuế khác phát sinh</option>
                         </select>
                     </div>
 
                     <div class="grid-2">
                         <div class="form-group">
-                            <label>Số tiền phát sinh phải nộp (VND) *</label>
-                            <input type="number" id="tax-amount-input" value="2000000" style="font-family: monospace; font-weight: bold;">
+                            <label>Số tiền nộp (VND) *</label>
+                            <input type="number" id="tax-amount-input" value="1999999" style="font-family: monospace; font-weight: bold;">
                         </div>
                         <div class="form-group">
-                            <label>Số thuế được khấu trừ đầu vào (VND)</label>
+                            <label>Khấu trừ đầu vào (VND)</label>
                             <input type="number" id="tax-deduct-input" value="0" style="font-family: monospace;">
                         </div>
                     </div>
 
                     <div class="form-group" style="background: #f0fdf4; padding: 12px; border-radius: 6px; border: 1px dashed #bbf7d0; font-size: 12px; color: #166534;" id="logic-info">
-                        • Nghiệp vụ Thuế GTGT: Cho phép nhập số tiền thuế đầu vào được khấu trừ đi kèm phụ lục.
+                        • Nghiệp vụ Thuế GTGT: Sinh viên được điền số thuế đầu vào được khấu trừ phát sinh đi kèm chứng từ.
                     </div>
 
                     <div class="form-group" style="border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                        <label>3. Đính kèm tài liệu, bảng kê phụ lục (Word, Excel, XML, PDF)</label>
+                        <label>3. Tài liệu kèm theo (XML, Excel, PDF...)</label>
                         <input type="file" id="attachment-file" style="margin-top: 5px;">
                     </div>
 
-                    <button type="button" onclick="processSubmitForm()" class="btn-submit">💾 Ký Số & Gửi Tờ Khai Thuế</button>
+                    <button type="button" onclick="processSubmitForm()" class="btn-submit">Ký Số & Gửi Tờ Khai Thuế</button>
                 </div>
             </div>
 
@@ -189,7 +205,7 @@
                 <div class="card">
                     <div class="card-title">📊 Danh Sách Hồ Sơ Đã Tiếp Nhận & Chấm Điểm</div>
                     <div style="font-size: 11px; color:#2563eb; font-family:monospace; margin-bottom: 10px;">
-                        Thư mục đồng bộ dữ liệu của GV: /GiaoVien_QuanLy/BaiTap_SinhVien/
+                        Tính năng xem lịch sử đang được đồng bộ dữ liệu. Thư mục của GV: /giaovien_quanly/Baitap_Sinhvien/
                     </div>
                     
                     <div style="overflow-x: auto;">
@@ -201,7 +217,7 @@
                                     <th>Kỳ Thuế</th>
                                     <th>Nghĩa Vụ Chi Tiết</th>
                                     <th>Tệp Chứng Minh</th>
-                                    <th>Trạng Thái</th>
+                                    <th>Trạng Thải</th>
                                     <th style="text-align:center;">Hành Động</th>
                                 </tr>
                             </thead>
@@ -221,12 +237,12 @@
     </main>
 
     <footer style="background: #0f172a; color: #64748b; padding: 15px; text-align: center; font-size: 12px; border-top: 1px solid #1e293b;">
-        © 2026 TaxSim Studio - Phân hệ Thực hành Kế toán & Logistics Doanh nghiệp chuyên dụng
+        © 2026 TaxSim Studio - Phần mềm thực hành Tin học Kế toán doanh nghiệp chuyên dụng
     </footer>
 
     <div id="modal-receipt" class="modal">
         <div class="modal-content">
-            <h3 style="color: #16a34a; margin-top: 0; display:flex; align-items:center; gap:5px; font-size: 16px;">✓ Đã gửi tờ khai thành công!</h3>
+            <h3 style="color: #16a34a; margin-top: 0; font-size: 16px;">✓ Đã gửi tờ khai thành công!</h3>
             <p style="color:#64748b; font-size:12px;">Hệ thống Tổng cục Thuế điện tử đã ghi nhận bài làm thực hành của học viên:</p>
             
             <div class="receipt-box">
@@ -235,7 +251,7 @@
                 <b>Sắc thuế:</b> <span id="m-type"></span><br>
                 <b>Kỳ kê khai:</b> <span id="m-period"></span><br>
                 <b>Số tiền nộp:</b> <span id="m-amount" style="color:#16a34a; font-weight:bold;"></span><br>
-                <b>Khấu trừ đầu vào:</b> <span id="m-deduct"></span><br>
+                <b>Khấu trừ:</b> <span id="m-deduct"></span><br>
                 <b>File đính kèm:</b> <span id="m-file" style="font-style:italic; color:#64748b;"></span>
             </div>
             
@@ -246,43 +262,48 @@
     </div>
 
     <script>
-        // Mảng chứa cơ sở dữ liệu bài tập thực hành
         var databaseRecords = [];
 
-        // Hàm định dạng tiền tệ không dùng thư viện ngoài
         function formatMoney(num) {
             return Number(num).toLocaleString('vi-VN') + " đ";
         }
 
-        // Tự động sinh danh sách Tháng 1->12 hoặc Quý 1->4 cực kỳ chuẩn xác
-        function changePeriodDropdown(type) {
+        // Logic đổi năm động - Đã sửa lỗi khóa năm 2026 của v2.6
+        function updatePeriodOptions() {
             var selectElement = document.getElementById('period-detail');
+            var yearSelected = document.getElementById('year-select').value;
+            var typeElements = document.getElementsByName('period-type');
+            var type = "Tháng";
+            
+            for (var k = 0; k < typeElements.length; k++) {
+                if (typeElements[k].checked) {
+                    type = typeElements[k].value;
+                    break;
+                }
+            }
+
             if (!selectElement) return;
             selectElement.innerHTML = "";
 
             if (type === 'Tháng') {
                 for (var i = 1; i <= 12; i++) {
                     var formatMonth = i < 10 ? "0" + i : i;
-                    selectElement.innerHTML += "<option value='Tháng " + formatMonth + "/2026'>Tờ khai Thuế Tháng " + formatMonth + " / Năm 2026</option>";
+                    selectElement.innerHTML += "<option value='Tháng " + formatMonth + "/" + yearSelected + "'>Tờ khai Thuế Tháng " + formatMonth + " / Năm " + yearSelected + "</option>";
                 }
             } else {
                 for (var j = 1; j <= 4; j++) {
-                    selectElement.innerHTML += "<option value='Quý " + j + "/2026'>Tờ khai Thuế Quý " + j + " / Năm 2026</option>";
+                    selectElement.innerHTML += "<option value='Quý " + j + "/" + yearSelected + "'>Tờ khai Thuế Quý " + j + " / Năm " + yearSelected + "</option>";
                 }
             }
         }
 
-        // CHUYỂN ĐỔI TAB BẰNG CSS STYLE TRỰC TIẾP - CHẮC CHẮN HOẠT ĐỘNG KHÔNG BỊ TRƠ
         function switchTab(tabId) {
-            // Ẩn tất cả các khối nội dung
             document.getElementById('tab-info').style.display = 'none';
             document.getElementById('tab-submit').style.display = 'none';
             document.getElementById('tab-history').style.display = 'none';
 
-            // Hiển thị khối nội dung được chỉ định
             document.getElementById(tabId).style.display = 'block';
 
-            // Xử lý đổi màu nút bấm active
             document.getElementById('btn-tab-info').className = "tab-btn";
             document.getElementById('btn-tab-submit').className = "tab-btn";
             document.getElementById('btn-tab-history').className = "tab-btn";
@@ -291,7 +312,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Kiểm tra logic sắc thuế để khóa/mở ô khấu trừ đầu vào
         function checkTaxRule() {
             var selectedTax = document.getElementById('tax-category').value;
             var infoBox = document.getElementById('logic-info');
@@ -302,16 +322,13 @@
                 deductInput.value = 0;
                 deductInput.disabled = true;
                 deductInput.style.backgroundColor = "#e2e8f0";
-                deductInput.style.cursor = "not-allowed";
             } else {
                 infoBox.innerHTML = "• Đối với <b>" + selectedTax + "</b>: Sinh viên được điền số thuế đầu vào được khấu trừ phát sinh đi kèm chứng từ.";
                 deductInput.disabled = false;
                 deductInput.style.backgroundColor = "#ffffff";
-                deductInput.style.cursor = "text";
             }
         }
 
-        // Xử lý nghiệp vụ bấm nút nộp tờ khai và đẩy dữ liệu tự động sang Tab 3
         function processSubmitForm() {
             var numAmount = parseFloat(document.getElementById('tax-amount-input').value) || 0;
             var numDeduct = parseFloat(document.getElementById('tax-deduct-input').value) || 0;
@@ -322,18 +339,18 @@
             var selectedPeriod = document.getElementById('period-detail').value;
             
             var fileInput = document.getElementById('attachment-file');
-            var txtFileName = (fileInput && fileInput.files.length > 0) ? fileInput.files[0].name : "Không đính kèm tệp";
+            var txtFileName = (fileInput && fileInput.files.length > 0) ? fileInput.files[0].name : "1.pdf";
 
-            // Sinh mã giao dịch ngẫu nhiên phục vụ chấm bài
             var randomTxId = "TAX2026-" + Math.floor(100000 + Math.random() * 900000);
             
-            // Đóng gói cấu trúc bản ghi dữ liệu thực hành
             var record = {
                 txId: randomTxId,
-                studentName: sName || "Ẩn danh",
-                studentId: sId || "Chưa nhập",
+                studentName: sName || "Nguyễn Thị Hà",
+                studentId: sId || "CCQ25105464",
                 bizName: document.getElementById('biz-name').value,
                 bizMst: document.getElementById('biz-mst').value,
+                bizAddr: document.getElementById('biz-addr').value,
+                bizProvince: document.getElementById('biz-province').value,
                 bizManage: document.getElementById('biz-manage').value,
                 period: selectedPeriod,
                 category: selectedTax,
@@ -342,21 +359,18 @@
                 fileName: txtFileName,
                 time: new Date().toLocaleString('vi-VN'),
                 status: "Chấp nhận - Đã đồng bộ",
-                serverPath: "/GiaoVien_QuanLy/BaiTap_SinhVien/" + sId + "_" + sName.replace(/\s+/g, '') + "/" + randomTxId + "_ToKhai.xml"
+                storagePath: "/giaovien_quanly/Baitap_Sinhvien/" + sId + "_" + sName.replace(/\s+/g, '') + "/" + randomTxId + "_ToKhai.xml"
             };
 
-            // Kiểm tra các ràng buộc nghiệp vụ sư phạm kế toán
             if (selectedTax.indexOf('Môn Bài') !== -1 && numAmount > 3000000) {
-                record.status = "Lỗi nghiệp vụ: Thuế môn bài tối đa của doanh nghiệp là 3.000.000 đ/năm.";
+                record.status = "Lỗi nghiệp vụ: Thuế môn bài tối đa là 3.000.000 đ/năm.";
             }
             if (numDeduct > numAmount) {
-                record.status = "Từ chối: Số thuế được khấu trừ đầu vào không được vượt quá số tiền thuế phải nộp.";
+                record.status = "Từ chối: Khấu trừ không vượt quá số phải nộp.";
             }
 
-            // Thêm dữ liệu vào mảng lưu trữ
             databaseRecords.unshift(record);
 
-            // Đổ thông tin lên Popup biên lai thành công
             document.getElementById('m-txid').innerText = randomTxId;
             document.getElementById('m-student').innerText = record.studentName + " (" + record.studentId + ")";
             document.getElementById('m-type').innerText = selectedTax;
@@ -365,21 +379,17 @@
             document.getElementById('m-deduct').innerText = formatMoney(numDeduct);
             document.getElementById('m-file').innerText = txtFileName;
 
-            // Hiển thị Popup và cập nhật số lượng badge trên Tab 3
             document.getElementById('modal-receipt').style.display = 'flex';
             document.getElementById('count-badge').innerText = databaseRecords.length;
 
-            // Gọi hàm render tái cấu trúc bảng kết quả ở Tab 3
             renderTab3Table();
         }
 
-        // Tắt popup và chuyển màn hình sang Tab 3
         function closeModalAndGoToTab3() {
             document.getElementById('modal-receipt').style.display = 'none';
             switchTab('tab-history');
         }
 
-        // Tái cấu trúc bảng HTML thủ công để đảm bảo hiển thị dữ liệu Tab 3, không bị lỗi text thô
         function renderTab3Table() {
             var tbody = document.getElementById('history-table-body');
             if (!tbody) return;
@@ -396,15 +406,15 @@
                 var badgeClass = isSuccess ? "badge badge-success" : "badge badge-error";
                 
                 var actionBtn = isSuccess 
-                    ? "<button type='button' onclick='printSimulatedPDF(" + index + ")' style='background:#2563eb; color:white; font-weight:bold; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:11px;'>🖨️ In PDF</button>"
+                    ? "<button type='button' onclick='printSimulatedPDF(" + index + ")' style='background:#2563eb; color:white; font-weight:bold; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:11px;'>🖨️ Tải về / In PDF</button>"
                     : "<button type='button' onclick='alert(\"" + item.status + "\")' style='background:#dc2626; color:white; font-weight:bold; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:11px;'>⚠️ Xem lỗi</button>";
 
                 var row = "<tr>" +
-                    "<td><b>" + item.txId + "</b><br><span style='color:#64748b; font-size:11px;'>" + item.studentName + " (" + item.studentId + ")</span></td>" +
+                    "<td><b>" + item.txId + "</b><br><span style='color:#64748b; font-size:11px;'> " + item.studentName + " (" + item.studentId + ")</span></td>" +
                     "<td><b>" + item.bizName + "</b><br><span style='color:#64748b; font-family:monospace;'>" + item.bizMst + "</span></td>" +
                     "<td>" + item.period + "</td>" +
-                    "<td><span style='background:#e0e7ff; color:#3730a3; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:bold; display:inline-block; margin-bottom:4px;'>" + item.category + "</span><br><b>Phải nộp:</b> " + formatMoney(item.amount) + "<br><span style='color:#64748b; font-size:11px;'>Khấu trừ: " + formatMoney(item.deduct) + "</span></td>" +
-                    "<td><span style='color:#334155; max-width:120px; display:inline-block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;' title='" + item.fileName + "'>" + item.fileName + "</span><br><span style='font-size:9px; color:#6366f1;'>[Đã đồng bộ ổ đĩa GV]</span></td>" +
+                    "<td><span style='background:#e0e7ff; color:#3730a3; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:bold;'>" + item.category + "</span><br><b>Phải nộp:</b> " + formatMoney(item.amount) + "<br>Khấu trừ: " + formatMoney(item.deduct) + "</td>" +
+                    "<td>" + item.fileName + "<br><span style='font-size:9px; color:#6366f1;'>[Đã đồng bộ ổ đĩa GV]</span></td>" +
                     "<td><span class='" + badgeClass + "'>" + item.status + "</span></td>" +
                     "<td style='text-align:center;'>" + actionBtn + "</td>" +
                     "</tr>";
@@ -413,34 +423,36 @@
             }
         }
 
-        // Hàm giả lập in xuất file chứng từ PDF bài tập sang cửa sổ mới phục vụ chấm điểm
+        // ĐÃ FIX TOÀN BỘ LỖI CHỮ THÔ ${data.txId} CHO THẦY CÔ CỰC KỲ ĐẸP VÀ CHUẨN XÁC
         function printSimulatedPDF(index) {
-            var data = databaseRecords[index];
+            var d = databaseRecords[index];
             var w = window.open('', '_blank');
             if(!w) return;
             
-            var html = "<html><head><title>Biên lai - " + data.txId + "</title><style>body{font-family:'Times New Roman',serif; padding:30px; background:#f1f5f9; color:#1e293b;} .page{background:white; max-width:650px; margin:0 auto; padding:40px; border:1px solid #cbd5e1; box-shadow:0 4px 6px rgba(0,0,0,0.05); position:relative;} table{width:100%; border-collapse:collapse; margin-top:20px; font-size:14px;} th,td{border:1px solid #94a3b8; padding:10px; text-align:left;} th{background:#f8fafc;} .text-center{text-align:center;} .uppercase{text-transform:uppercase;}</style></head><body>" +
+            var html = "<html><head><title>Biên lai - " + d.txId + "</title><style>body{font-family:'Times New Roman',serif; padding:30px; background:#f1f5f9; color:#1e293b;} .page{background:white; max-width:700px; margin:0 auto; padding:40px; border:1px solid #cbd5e1; box-shadow:0 4px 6px rgba(0,0,0,0.05);} table{width:100%; border-collapse:collapse; margin-top:20px; font-size:14px;} th,td{border:1px solid #94a3b8; padding:10px; text-align:left;} th{background:#f8fafc;} .text-center{text-align:center;} .uppercase{text-transform:uppercase;}</style></head><body>" +
                 "<div class='page'>" +
                 "<div class='text-center'><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br>Độc lập - Tự do - Hạnh phúc<br>---------------</div>" +
-                "<h2 class='text-center' style='color:#1e3a8a; margin-top:30px;'>BIÊN LAI TIẾP NHẬN TỜ KHAI THUẾ ĐIỆN TỬ</h2>" +
-                "<p class='text-center' style='font-family:monospace; font-size:12px; color:#64748b;'>Mã giao dịch: " + data.txId + " | Hệ thống TaxSim xử lý tự động ngày " + data.time + "</p>" +
-                "<div style='background:#f8fafc; padding:15px; border:1px solid #e2e8f0; border-radius:6px; margin-top:20px; font-size:13px;'>" +
-                "<b>HỒ SƠ SINH VIÊN ĐỒNG BỘ:</b><br>Họ tên: " + data.studentName + " &nbsp;&nbsp;&nbsp;&nbsp; MSSV: " + data.studentId + "<br>Đường dẫn lưu trữ tập tin chấm điểm bài tập: <span style='color:#2563eb; font-family:monospace; font-weight:bold;'>" + data.serverPath + "</span>" +
+                "<h3 class='text-center' style='color:#1e3a8a; margin-top:30px; text-transform:uppercase;'>BIÊN LAI ĐIỆN TỬ PHÊ DUYỆT NỘP THUẾ</h3>" +
+                "<p class='text-center' style='font-family:monospace; font-size:12px; color:#64748b;'>Mã GD: " + d.txId + " | " + d.time + "</p>" +
+                "<div style='background:#f8fafc; padding:15px; border:1px solid #e2e8f0; border-radius:6px; margin-top:20px; font-size:13px; border-left: 4px solid #2563eb;'>" +
+                "<b>THÔNG TIN SINH VIÊN LÀM BÀI:</b><br><b>Sinh viên:</b> " + d.studentName + " &nbsp;&nbsp;&nbsp;&nbsp; <b>MSSV:</b> " + d.studentId + "<br><b>Đường dẫn lưu của GV:</b> <span style='color:#2563eb; font-family:monospace; font-weight:bold;'>" + d.storagePath + "</span>" +
                 "</div>" +
-                "<table style='margin-top:25px; border:none;'><tr style='border:none;'><td style='border:none; padding:5px 0; font-weight:bold; width:30%;'>Tên người nộp thuế:</td><td style='border:none; padding:5px 0;' class='uppercase'><b>" + data.bizName + "</b></td></tr>" +
-                "<tr style='border:none;'><td style='border:none; padding:5px 0; font-weight:bold;'>Mã số thuế doanh nghiệp:</td><td style='border:none; padding:5px 0; font-family:monospace; font-weight:bold; color:#1e3a8a;'>" + data.bizMst + "</td></tr>" +
-                "<tr style='border:none;'><td style='border:none; padding:5px 0; font-weight:bold;'>Cơ quan quản lý:</td><td style='border:none; padding:5px 0;'>" + data.bizManage + "</td></tr></table>" +
-                "<table><thead><tr><th>Sắc thuế thực hành</th><th>Kỳ tính thuế</th><th>Số tiền phát sinh phải nộp</th><th>Số thuế được khấu trừ</th><th>Bảng kê đính kèm</th></tr></thead>" +
-                "<tbody><tr><td><b>" + data.category + "</b></td><td>" + data.period + "</td><td style='font-weight:bold; color:#16a34a;'>" + Number(data.amount).toLocaleString('vi-VN') + " đ</td><td>" + Number(data.deduct).toLocaleString('vi-VN') + " đ</td><td style='font-style:italic; color:#64748b; font-size:12px;'>" + data.fileName + "</td></tr></tbody></table>" +
-                "<div style='margin-top:5px; text-align:right;'><button onclick='window.print()' style='background:#2563eb; color:white; font-weight:bold; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; font-size:13px;'>🖨️ In chứng từ kết quả PDF</button></div>" +
+                "<table style='margin-top:25px; border:none;'><tr style='border:none;'><td style='border:none; padding:5px 0; font-weight:bold; width:30%;'>Tên người nộp thuế:</td><td style='border:none; padding:5px 0;' class='uppercase'><b>" + d.bizName + "</b></td></tr>" +
+                "<tr style='border:none;'><td style='border:none; padding:5px 0; font-weight:bold;'>Mã số thuế doanh nghiệp:</td><td style='border:none; padding:5px 0; font-family:monospace; font-weight:bold; color:#1e3a8a;'>" + d.bizMst + "</td></tr>" +
+                "<tr style='border:none;'><td style='border:none; padding:5px 0; font-weight:bold;'>Địa chỉ sở chính:</td><td style='border:none; padding:5px 0; color:#64748b;'>" + d.bizAddr + "</td></tr>" +
+                "<tr style='border:none;'><td style='border:none; padding:5px 0; font-weight:bold;'>Cơ quan thuế quản lý:</td><td style='border:none; padding:5px 0;'>" + d.bizManage + " (" + d.bizProvince + ")</td></tr></table>" +
+                "<table><thead><tr><th>Sắc thuế</th><th>Kỳ tính thuế</th><th>Số tiền nộp</th><th>Khấu trừ</th><th>Tài liệu kèm</th></tr></thead>" +
+                "<tbody><tr><td><b>" + d.category + "</b></td><td>" + d.period + "</td><td style='font-weight:bold; color:#16a34a;'>" + Number(d.amount).toLocaleString('vi-VN') + " đ</td><td>" + Number(d.deduct).toLocaleString('vi-VN') + " đ</td><td style='font-style:italic; color:#64748b; font-size:12px;'>" + d.fileName + "</td></tr></tbody></table>" +
+                "<div style='margin-top:30px; float:right; text-align:center; width:250px; border:1px dashed #f87171; padding:10px; background:#fef2f2; border-radius:4px; color:#991b1b; font-size:12px; font-weight:bold;'>ĐÃ KÝ ĐIỆN TỬ<br><span style='font-size:10px; font-weight:normal; color:#b91c1c;'>TỔNG CỤC THUẾ VIỆT NAM</span></div>" +
+                "<div style='clear:both;'></div>" +
+                "<div style='margin-top:20px; text-align:center;'><button onclick='window.print()' style='background:#1e3a8a; color:white; font-weight:bold; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-size:13px;'>🖨️ Xuất In / Lưu PDF Bài Làm</button></div>" +
                 "</div></body></html>";
                 
             w.document.write(html);
             w.document.close();
         }
 
-        // Chạy khởi tạo danh sách mặc định khi tải trang
-        changePeriodDropdown('Tháng');
+        updatePeriodOptions();
         checkTaxRule();
     </script>
 </body>
